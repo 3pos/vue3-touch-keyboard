@@ -10,7 +10,6 @@ First, install the package using npm:
 npm install vue3-touch-keyboard
 
 ```
-
 ## **Usage**
 
 Import the **`Keyboard`** component and use it in your Vue component:
@@ -252,3 +251,27 @@ import OnScreenKeyboard from 'vue3-touch-keyboard';
 ```
 
 In this example, the **`OnScreenKeyboard`** component is linked to an input field. When the input field is focused
+
+## **Notes**
+the **`OnScreenKeyboard`** component automatically manages the keyboard state through the **`useTouchKeyboard`** composable, providing a seamless touch keyboard experience.
+
+Feel free to customize the use of the **`Keyboard.vue`** component in a wrapper by utilizing the **`useTouchKeyboard`** composable. This composable can also be employed as a utility to control any wrapper around the **`Keyboard.vue`** component. Additionally, persistent state variables such as **`keyboardLocale`** and **`keyboardEnabled`** are available for further customization.
+
+```html
+<template>
+  <div>
+    <input ref="myInput" type="text" data-use-touch-keyboard data-layout="compact" />
+    <OnScreenKeyboard />
+  </div>
+</template>
+
+<script setup>
+import OnScreenKeyboard from 'vue3-touch-keyboard';
+import { useTouchKeyboard } from 'vue3-touch-keyboard';
+</script>
+
+```
+
+In this modified example, the **`useTouchKeyboard`** composable is utilized to control the state of the touch keyboard. The input field is tagged with the **`data-use-touch-keyboard`** attribute and a specific layout is set with the **`data-layout`** attribute.
+
+This comprehensive approach allows for global usage of the touch keyboard, controlled by the **`useTouchKeyboard`** composable, and provides flexibility for customization in specific scenarios.

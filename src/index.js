@@ -9,7 +9,7 @@ export { Keyboard, useTouchKeyboard, OnScreenKeyboard};
 export default {
   install: (app) => {
     app.component('Keyboard', Keyboard);
-    app.component('HelloWorld', HelloWorld);
+    app.component('OnScreenKeyboard', OnScreenKeyboard);
     app.provide('useTouchKeyboard', useTouchKeyboard);
   },
 };
