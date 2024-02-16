@@ -1,13 +1,12 @@
 # **Vue3 Touch Keyboard**
 
-The **`Keyboard`** component from the **`vue3-touch-keyboard`** package is a customizable touch keyboard for Vue 3 applications. It can be used to provide a touch interface for text input fields.
+The **`Keyboard`** component from the **`vue3-touch-keyboard`** package, based on the [vue-touch-keyboard](https://github.com/icebob/vue-touch-keyboard.git) package by [icebob](https://github.com/icebob), is a customizable touch keyboard for Vue 3 applications. It can be used to provide a touch interface for text input fields.
 
 ## **Installation**
 
 First, install the package using npm:
 
 ```bash
-bashCopy code
 npm install vue3-touch-keyboard
 
 ```
@@ -17,7 +16,6 @@ npm install vue3-touch-keyboard
 Import the **`Keyboard`** component and use it in your Vue component:
 
 ```jsx
-javascriptCopy code
 import Keyboard from 'vue3-touch-keyboard';
 
 export default {
@@ -30,8 +28,7 @@ export default {
 
 Then, use the **`Keyboard`** component in your template:
 
-```
-vueCopy code
+```html
 <Keyboard :input="myInput" :layout="myLayout" />
 
 ```
@@ -86,8 +83,7 @@ The **`Keyboard`** component uses scoped CSS, which means that the styles are ap
 
 Here's an example of how to use the **`Keyboard`** component:
 
-```
-vueCopy code
+```html
 <template>
   <div>
     <input ref="myInput" type="text" />
@@ -123,7 +119,6 @@ This package provides a composable **`useTouchKeyboard`** for Vue 3 applications
 ## **Installation**
 
 ```bash
-bashCopy code
 npm install vue3-touch-keyboard
 
 ```
@@ -134,8 +129,7 @@ npm install vue3-touch-keyboard
     
     Import the **`useTouchKeyboard`** composable in your component.
     
-    ```jsx
-    javascriptCopy code
+    ```js
     import { useTouchKeyboard } from 'vue3-touch-keyboard';
     
     ```
@@ -145,7 +139,6 @@ npm install vue3-touch-keyboard
     Call the **`useTouchKeyboard`** function in your **`setup`** function.
     
     ```jsx
-    javascriptCopy code
     setup() {
       const touchKeyboard = useTouchKeyboard();
       // ...
@@ -181,7 +174,6 @@ The **`useTouchKeyboard`** function returns an object with the following propert
 To use the touch keyboard with an input element, add the **`data-use-touch-keyboard`** attribute to it.
 
 ```html
-htmlCopy code
 <input data-use-touch-keyboard>
 
 ```
@@ -189,7 +181,6 @@ htmlCopy code
 To set a specific layout for the keyboard, use the **`data-layout`** attribute:
 
 ```html
-htmlCopy code
 <input data-use-touch-keyboard data-layout="normal">
 
 ```
@@ -214,7 +205,6 @@ npm install vue3-touch-keyboard
 Import the **`OnScreenKeyboard`** component and use it in your Vue component:
 
 ```jsx
-javascriptCopy code
 import OnScreenKeyboard from 'vue3-touch-keyboard';
 
 export default {
@@ -227,8 +217,7 @@ export default {
 
 Then, use the **`OnScreenKeyboard`** component in your template:
 
-```
-vueCopy code
+```html
 <OnScreenKeyboard />
 
 ```
@@ -248,8 +237,7 @@ The **`OnScreenKeyboard`** component uses the **`useTouchKeyboard`** composable 
 
 Here's an example of how to use the **`OnScreenKeyboard`** component:
 
-```
-vueCopy code
+```html
 <template>
   <div>
     <input ref="myInput" type="text" data-use-touch-keyboard data-layout="compact" />
