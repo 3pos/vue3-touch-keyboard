@@ -1,0 +1,99 @@
+#app.vue3-touch-keyboard-open {
+    padding-bottom: 45vh !important; /* Adjust this value to match the height of your keyboard */
+}
+.vue3-touch-keyboard {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0.5em;
+    background-color: #EEE;
+    box-shadow: 0px -3px 10px rgba(black, 0.3);
+    border-radius: 10px;
+}
+
+.vue3-touch-keyboard .keyboard {
+    width: 100%;
+    margin: 0;
+}
+
+.vue3-touch-keyboard .keyboard .line {
+    display: flex;
+    justify-content: space-around;
+}
+
+.vue3-touch-keyboard .keyboard .line:not(:last-child) {
+    margin-bottom: 0.5em;
+}
+
+.vue3-touch-keyboard .keyboard .key {
+    margin-right: 0.5em;
+    flex: 40;
+    height: 2.2em;
+    line-height: 2.2em;
+    overflow: hidden;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
+    border-radius: 0.35em;
+    font-size: 1.25em;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+}
+
+.vue3-touch-keyboard .keyboard .key.backspace {
+    background-image: url("../assets/icons/backspace.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 35%;
+}
+
+.vue3-touch-keyboard .keyboard .key.half {
+    flex: 20;
+}
+
+.vue3-touch-keyboard .keyboard .key.control {
+    color: #fff;
+    background-color: #7d7d7d;
+    border-color: #656565;
+}
+
+.vue3-touch-keyboard .keyboard .key.featured {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.vue3-touch-keyboard .keyboard .key:hover {
+    color: #333;
+    background-color: #d6d6d6;
+    border-color: #adadad;
+}
+
+.vue3-touch-keyboard .keyboard .key:active {
+    transform: scale(0.98);
+    color: #333;
+    background-color: #d4d4d4;
+    border-color: #8c8c8c;
+}
+
+.vue3-touch-keyboard .keyboard .key.activated {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.vue3-touch-keyboard .keyboard .placeholder {
+    flex: 20;
+    height: 2.2em;
+    line-height: 2.2em;
+    margin-right: 0.5em;
+}
