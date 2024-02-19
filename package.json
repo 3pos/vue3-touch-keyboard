@@ -16,5 +16,10 @@
     "@vitejs/plugin-vue": "^5.0.3",
     "lodash": "^4.17.21",
     "vite": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3pos/vue3-touch-keyboard"
+  },
+  "license": "MIT"
 }
