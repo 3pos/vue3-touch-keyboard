@@ -1,6 +1,24 @@
-#app.vue3-touch-keyboard-open {
-    padding-bottom: 45vh !important; /* Adjust this value to match the height of your keyboard */
+
+.slide-leave-active, .slide-enter-active {
+    transition: all .1s ease;
 }
+
+.slide-enter-from,
+.slide-leave-to {
+    transform: translateY(100%);
+}
+
+.slide-enter-to,
+.slide-leave-from {
+    transform: translateY(0);
+}
+
+#app.vue3-touch-keyboard-open {
+    padding-bottom: 45vh !important;
+    transition: all .1s ease-in-out;
+    /* Adjust this value to match the height of your keyboard */
+}
+
 .vue3-touch-keyboard {
     position: fixed;
     left: 0;
