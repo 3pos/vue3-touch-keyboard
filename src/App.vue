@@ -1,16 +1,9 @@
 <script setup>
-import ControlsComponent from './components/ControlsComponent.vue';
 import OnScreenKeyboard from './components/OnScreenKeyboard.vue';
-import useTouchKeyboard from './composables/useTouchKeyboard';
-import OtherForms from './components/OtherForms.vue';
-
-const { showTouchKeyboard} = useTouchKeyboard();
 </script>
 
 <template>
   <div>
-    <ControlsComponent />
-    <OtherForms />
     <div>
       <fieldset>
         <legend>Normal layout</legend>
