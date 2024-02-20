@@ -1,5 +1,8 @@
 <script setup>
-import OnScreenKeyboard from './components/OnScreenKeyboard.vue';
+import { OnScreenKeyboard, useTouchKeyboard } from './index.js';
+
+const {toggleTouchKeyboard} = useTouchKeyboard();
+toggleTouchKeyboard();
 </script>
 
 <template>

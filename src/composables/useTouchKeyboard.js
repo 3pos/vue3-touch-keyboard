@@ -84,7 +84,7 @@ export default function useTouchKeyboard() {
     // Function to show the touch keyboard based on the provided event
     const showTouchKeyboard = (e) => {
         if (!state.keyboardEnabled) return;
-
+        state.options.visible = false; // Hide the keyboard first to prevent flickering
         state.options.input = e.target;
         // Check for data-layout attribute and use its value if it exists
         const layoutAttribute = e.target.dataset.layout || "normal";

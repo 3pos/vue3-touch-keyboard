@@ -4,12 +4,22 @@ import useTouchKeyboard from './composables/useTouchKeyboard.js';
 
 import './assets/styles.css';
 
-export { Keyboard, useTouchKeyboard, OnScreenKeyboard};
+const install = (app) => {
+  app.component('Keyboard', Keyboard);
+  app.component('OnScreenKeyboard', OnScreenKeyboard);
+  app.provide('useTouchKeyboard', useTouchKeyboard);
+};
+
+export {
+  install,
+  Keyboard,
+  OnScreenKeyboard,
+  useTouchKeyboard
+};
 
 export default {
-  install: (app) => {
-    app.component('Keyboard', Keyboard);
-    app.component('OnScreenKeyboard', OnScreenKeyboard);
-    app.provide('useTouchKeyboard', useTouchKeyboard);
-  },
+  install,
+  Keyboard,
+  OnScreenKeyboard,
+  useTouchKeyboard
 };
