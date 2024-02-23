@@ -11,7 +11,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.js'),
       name: 'Vue3TouchKeyboard',
-      fileName: (format) => `vue3-touch-keyboard.${format}.js`
+      fileName: 'vue3-touch-keyboard'
     },
     rollupOptions: {
       // Make sure to externalize deps that shouldn't be bundled
