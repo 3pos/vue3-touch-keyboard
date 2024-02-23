@@ -1,16 +1,16 @@
 {
-  "name": "vue3-touch-keyboard",
+  "name": "test-vue3-touch-keyboard",
   "private": false,
-  "version": "1.3.4",
+  "version": "1.3.5",
   "type": "module",
   "files": ["dist"],
-  "main": "./dist/vue3-touch-keyboard.umd.js",
+  "main": "./dist/vue3-touch-keyboard.js",
+  "style": "./dist/style.css",
   "exports": {
     ".": {
-      "import": "./dist/vue3-touch-keyboard.es.js",
-      "require": "./dist/vue3-touch-keyboard.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
+      "import": "./dist/vue3-touch-keyboard.js",
+      "require": "./dist/vue3-touch-keyboard.umd.cjs"
+    }
   },
   "scripts": {
     "dev": "vite",
