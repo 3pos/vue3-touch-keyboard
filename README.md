@@ -1,6 +1,7 @@
 # **Vue3 Touch Keyboard**
 
 The **`Keyboard`** component from the **`vue3-touch-keyboard`** package, based on the [vue-touch-keyboard](https://github.com/icebob/vue-touch-keyboard.git) package by [icebob](https://github.com/icebob), is a customizable touch keyboard for Vue 3 applications. It can be used to provide a touch interface for text input fields.
+Provided by 3POS / www.3pos.de
 
 ## **Installation**
 
