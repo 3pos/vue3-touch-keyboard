@@ -1,11 +1,12 @@
 {
   "name": "vue3-touch-keyboard",
   "private": false,
-  "version": "1.3.6",
+  "version": "1.3.9",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue3-touch-keyboard.js",
-  "style": "./dist/style.css",
   "exports": {
     ".": {
       "import": "./dist/vue3-touch-keyboard.js",
