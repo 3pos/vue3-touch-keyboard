@@ -15,7 +15,7 @@
 
 #app.vue3-touch-keyboard-open {
     padding-bottom: 45vh !important;
-    transition: all .1s ease-in-out;
+    transition: all .1s ease !important;
     /* Adjust this value to match the height of your keyboard */
 }
 
@@ -24,7 +24,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 3000;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;

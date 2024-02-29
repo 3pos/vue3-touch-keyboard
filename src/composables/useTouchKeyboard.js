@@ -1,5 +1,5 @@
 // Import necessary dependencies from Vue
-import { ref, reactive, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from "vue";
 
 // Import keyboard layouts
 import arLayout from '../components/layouts/ar.js';
@@ -37,6 +37,8 @@ export default function useTouchKeyboard() {
 
     // Define a ref for storing the interval ID used for clearing timeouts
     const clearIntervalID = ref(null);
+    const keyboardEnabled = computed(() => state.keyboardEnabled);
+    const keyboardLocale = computed(() => state.keyboardLocale);
 
     // Function to set the local layout based on the provided locale
     const setLocalLayout = (locale) => {
@@ -65,10 +67,10 @@ export default function useTouchKeyboard() {
     }
 
     // Function to toggle the visibility of the touch keyboard
-    const toggleTouchKeyboard = () => {
-        state.keyboardEnabled = !state.keyboardEnabled;
-        localStorage.setItem('vue3-touch-keyboard-enabled', state.keyboardEnabled);
-        if (!state.keyboardEnabled)
+    const toggleTouchKeyboard = (isEnabled) => {
+        state.keyboardEnabled = isEnabled;
+        localStorage.setItem('vue3-touch-keyboard-enabled', isEnabled);
+        if (!isEnabled)
             hideTouchKeyboard();
     };
 
@@ -87,9 +89,9 @@ export default function useTouchKeyboard() {
         state.options.visible = false; // Hide the keyboard first to prevent flickering
         state.options.input = e.target;
         // Check for data-layout attribute and use its value if it exists
-        const layoutAttribute = e.target.dataset.layout || "normal";
+        const layoutAttribute = e.target.closest('[data-layout]')?.dataset.layout || "normal";
 
-        state.options.layout = getKeyBoardLayout(state.keyboardLocale,layoutAttribute); // use locale for layout selection
+        state.options.layout = getKeyBoardLayout(state.keyboardLocale, layoutAttribute); // use locale for layout selection
         
         if (!state.options.visible) {
             //TIMEOUT BECAUSE OUR OUTSIDE CLICK LISTENER IS CLOSING THE WINDOW INSTEAD
@@ -126,24 +128,24 @@ export default function useTouchKeyboard() {
         }
     };
 
-    // ...
-
+    const handleFocus = (e) => {
+        if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') && e.target.closest('[data-use-touch-keyboard]')) {
+            showTouchKeyboard(e);
+        }else {
+            hideTouchKeyboard();
+        }
+    }
     // Add event listeners when the component is mounted
     onMounted(() => {
-        state.keyboardEnabled = Boolean(localStorage.getItem('vue3-touch-keyboard-enabled'));
+        state.keyboardEnabled = Boolean(localStorage.getItem('vue3-touch-keyboard-enabled')==='true');
+        state.keyboardLocale = localStorage.getItem('vue3-touch-keyboard-locale');
         if (!state.eventListenerAdded) {
-            document.getElementById('vue3-touch-keyboard-element').addEventListener('mousedown', function(event) {
+            document.getElementById('vue3-touch-keyboard-element')?.addEventListener('mousedown', function(event) {
                 event.preventDefault();
             });
             document.addEventListener('click', dismissOnScreenKeyboard);
             // Add global focus event listener to show keyboard when input is focused
-            document.addEventListener('focus', (e) => {
-                if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') && e.target.hasAttribute('data-use-touch-keyboard')) {
-                    showTouchKeyboard(e);
-                }else {
-                    hideTouchKeyboard();
-                }
-            }, true);
+            document.addEventListener('focus', handleFocus, true);
             state.eventListenerAdded = true;
         }
     });
@@ -151,27 +153,21 @@ export default function useTouchKeyboard() {
     // Remove event listeners when the component is unmounted
     onUnmounted(() => {
         clearInterval(clearIntervalID.value);
-        document.getElementById('vue3-touch-keyboard-element').removeEventListener('mousedown', function(event) {
+        document.getElementById('vue3-touch-keyboard-element')?.removeEventListener('mousedown', function(event) {
             event.preventDefault();
         });
         document.removeEventListener('click', dismissOnScreenKeyboard);
         // Remove global focus event listener
-        document.removeEventListener('focus', (e) => {
-            if ((e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') && e.target.hasAttribute('data-use-touch-keyboard')) {
-                showTouchKeyboard(e);
-            }else {
-                hideTouchKeyboard();
-            }
-        }, true); // Use capture phase to detect focus events
+        document.removeEventListener('focus', handleFocus, true); // Use capture phase to detect focus events
         state.eventListenerAdded = false;
     });
 
     // Return the necessary properties and functions
     return {
         options: state.options,
-        keyboardLocale: state.keyboardLocale,
+        keyboardLocale,
         layouts,
-        keyboardEnabled: state.keyboardEnabled,
+        keyboardEnabled,
         setLocalLayout,
         toggleTouchKeyboard,
         showTouchKeyboardWithoutEvent,

@@ -10,6 +10,13 @@ First, install the package using npm:
 npm install vue3-touch-keyboard
 
 ```
+Include style in your main.js
+
+```javascript
+../node_modules/vue3-touch-keyboard/dist/style.css
+
+```
+
 ## **Usage**
 
 Import the **`Keyboard`** component and use it in your Vue component:
@@ -149,24 +156,28 @@ This package provides a composable **`useTouchKeyboard`** for Vue 3 applications
 
 The **`useTouchKeyboard`** function returns an object with the following properties and methods:
 
-- **`options`**: An object containing the current options for the touch keyboard.
-- **`keyboardLocale`**: The current locale of the keyboard.
+- **`options`**: An object containing the current options for the touch keyboard component.
+- **`keyboardLocale`**: The current locale of the keyboard. (uses localstorage to persist state)
 - **`layouts`**: An object containing the available keyboard layouts.
-- **`keyboardEnabled`**: A boolean indicating whether the touch keyboard is enabled.
+- **`keyboardEnabled`**: A boolean indicating whether the touch keyboard is enabled. (uses localstorage to persist state)
 - **`setLocalLayout(locale)`**: A function to set the local layout based on the provided locale.
-- **`toggleTouchKeyboard()`**: A function to toggle the visibility of the touch keyboard.
+- **`toggleTouchKeyboard(isEnabled)`**: A function to toggle the visibility of the touch keyboard.
 - **`showTouchKeyboardWithoutEvent()`**: A function to show the touch keyboard without any event.
-- **`showTouchKeyboard(e)`**: A function to show the touch keyboard based on the provided event.
+- **`showTouchKeyboard(e)`**: A function to show the touch keyboard based on the focus event.
 - **`hideTouchKeyboard()`**: A function to hide the touch keyboard.
 - **`dismissOnScreenKeyboard(e)`**: A function to dismiss the on-screen keyboard based on the provided event.
 - **`getKeyBoardLayout(locale, layout)`**: A function to get the keyboard layout based on the provided locale and layout.
 
 ## **Input Attributes**
 
-To use the touch keyboard with an input element, add the **`data-use-touch-keyboard`** attribute to it.
+To use the touch keyboard composable with an input element, add the **`data-use-touch-keyboard`** attribute to it.
+Note that you need to use your own wrapper arround the Keyboard.vue component.
+You can also use showTouchKeyboard method in a focus event of the target input if you don't want to use data-use-touch-keyboard attribute, but both serve the same purpose 
 
 ```html
 <input data-use-touch-keyboard>
+or
+<input @focus="showTouchKeyboard">
 
 ```
 
@@ -177,13 +188,12 @@ To set a specific layout for the keyboard, use the **`data-layout`** attribute:
 
 ```
 
-The **`data-layout`** attribute can be set to any of the available layouts: 'normal', 'ar', 'fr', 'de', 'en'. If the specified layout does not exist, it will default to 'normal'.
+The **`data-layout`** attribute can be set to any of the available layouts: 'normal', 'numeric', 'compact'. If the specified layout does not exist, it will default to 'normal'.
 
 # **Vue3 Touch Keyboard - OnScreenKeyboard Component**
 
-The **`OnScreenKeyboard`** component from the **`vue3-touch-keyboard`** package is a wrapper around the **`Keyboard`** component. It uses  **`useTouchKeyboard`** composable to manage the state of the keyboard and provides an interface to show and hide the keyboard.
-It is recommended to use this component as global as possible, as it handles all the inputs that enables the touch keyboard
-
+The **`OnScreenKeyboard`** component is a wrapper around the **`Keyboard`** component. It uses  **`useTouchKeyboard`** composable to manage the state of the keyboard and provides an interface to show and hide the keyboard.
+It is recommended to use this component as global as possible (for example in the App.vue if you want to make it available for all components), as it handles all the inputs that enables the touch keyboard via setting the data-use-touch-keyboard attribute in the target input
 
 ## **Usage**
 
@@ -209,15 +219,7 @@ Then, use the **`OnScreenKeyboard`** component in your template:
 
 ## **Composable**
 
-The **`OnScreenKeyboard`** component uses the **`useTouchKeyboard`** composable to manage the state of the keyboard. The composable provides the following reactive properties and methods:
-
-- **`options`**: An object that contains the options for the keyboard. The options include:
-    - **`visible`**: A boolean that determines whether the keyboard is visible.
-    - **`layout`**: The layout of the keyboard.
-    - **`input`**: The input element to update with the keyboard input.
-    - **`options`**: Additional options for the keyboard.
-- **`hideTouchKeyboard`**: A method that hides the keyboard.
-
+The **`OnScreenKeyboard`** component uses the **`useTouchKeyboard`** composable to manage the state of the keyboard.
 ## **Example**
 
 Here's an example of how to use the **`OnScreenKeyboard`** component:
@@ -225,7 +227,7 @@ Here's an example of how to use the **`OnScreenKeyboard`** component:
 ```html
 <template>
   <div>
-    <input ref="myInput" type="text" data-use-touch-keyboard data-layout="compact" />
+    <input type="text" data-use-touch-keyboard data-layout="compact" />
     <OnScreenKeyboard />
   </div>
 </template>
@@ -253,6 +255,7 @@ Feel free to customize the use of the **`Keyboard.vue`** component in a wrapper 
 
 <script setup>
 import { useTouchKeyboard, OnScreenKeyboard } from 'vue3-touch-keyboard';
+const {keyboardLocale, keyboardEnabled, setLocalLayout, toggleTouchKeyboard} = useTouchKeyboard()
 </script>
 
 ```
